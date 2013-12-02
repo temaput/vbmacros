@@ -559,17 +559,8 @@ WordBasic.CurValues.ToolsOptionsEdit toe
 oldscp = toe.SmartCutPaste
 ' MsgBox Str$(oldscp)
 WordBasic.ToolsOptionsEdit SmartCutPaste:=0
-'----------------------------------------------------------------
-If 1 = 2 Then
-For i = 1 To WordBasic.CountStyles(0, 0)
-    sn$ = WordBasic.[StyleName$](i, 0, 0)
-    If sn$ <> "Default Paragraph Font" Then
-        WordBasic.FormatStyle Name:=sn$, Define:=1
-        WordBasic.FormatDefineStyleFont Bold:=0, Italic:=0
-'       FormatDefineStyleNumbers .Remove
-    End If
-Next i
-End If
+
+
 
 WordBasic.EndOfDocument
 WordBasic.ResetChar ' исправлено 25.04.2007 ПА: чтобы не зацикливался на последнем абзаце, если тот выделен п/ж или курсивом (не работает)
@@ -580,6 +571,13 @@ WordBasic.Insert "$"
 
 
 WordBasic.ShowAll 0
+
+' Сначала убьем все автоматические списки, чтобы буллиты и цифры не перелезли в верстку
+' ========================================================================
+For Each List In ActiveDocument.Lists
+    List.RemoveNumbers
+Next
+
 
 ' Знак больше и меньше
 '============================================================
