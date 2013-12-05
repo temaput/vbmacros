@@ -578,12 +578,12 @@ For Each List In ActiveDocument.Lists
     List.RemoveNumbers
 Next
 
-' Уберем все сдвиги
+' Get rid of indents
 ' ========================================================================
 For Each para In ActiveDocument.Paragraphs
     para.FirstLineIndent = 0
     para.LeftIndent = 0
-    para.Format.Alignment = wdAlignPageNumberLeft
+    para.Format.Alignment = wdAlignParagraphLeft
 Next
 
 ' Знак больше и меньше
